@@ -1,5 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include "ship.h"
+#include <chrono>
+#include <thread>
 
 int main()
 {
@@ -8,6 +10,7 @@ int main()
 
     Ship player1;
 
+    auto lastFrameTimePoint = std::chrono::steady_clock::now();
     // run the program as long as the window is open
     while (window.isOpen())
     {
@@ -33,8 +36,13 @@ int main()
 
         window.draw(shape);
 
-        player1.update(window);
+        // entity updates
+        const auto now = std::chrono::steady_clock::now();
+        const float frameDelta = std::chrono::duration<float>(now-lastFrameTimePoint).count();
+        lastFrameTimePoint = now;
+        player1.update(window, frameDelta);
 
+        
         // end the current frame
         window.display();
     }
