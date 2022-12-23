@@ -1,9 +1,12 @@
 #include <SFML/Graphics.hpp>
+#include "ship.h"
 
 int main()
 {
     // create the window
     sf::RenderWindow window(sf::VideoMode(800, 600), "My window");
+
+    Ship player1;
 
     // run the program as long as the window is open
     while (window.isOpen())
@@ -19,9 +22,18 @@ int main()
 
         // clear the window with black color
         window.clear(sf::Color::Black);
-
+        window.setFramerateLimit(60);
         // draw everything here...
         // window.draw(...);
+
+        sf::CircleShape shape(50.f);
+
+        // set the shape color to green
+        shape.setFillColor(sf::Color(100, 250, 50));
+
+        window.draw(shape);
+
+        player1.update(window);
 
         // end the current frame
         window.display();
