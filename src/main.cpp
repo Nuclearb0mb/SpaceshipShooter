@@ -4,15 +4,17 @@
 
 #include "ship.h"
 #include "shot.h"
+#include "engine.h"
 
 int main()
 {
     // create the window
     sf::RenderWindow window(sf::VideoMode(800, 600), "My window");
 
-    Ship player1;
 
     Shot shot1(sf::Vector2f(1.0,0.0));
+
+    Engine::get().init();
 
     auto lastFrameTimePoint = std::chrono::steady_clock::now();
     // run the program as long as the window is open
@@ -44,7 +46,8 @@ int main()
         const auto now = std::chrono::steady_clock::now();
         const float frameDelta = std::chrono::duration<float>(now-lastFrameTimePoint).count();
         lastFrameTimePoint = now;
-        player1.update(window, frameDelta);
+
+        Engine::get().update(window, frameDelta);
         shot1.update(window, frameDelta);
 
         
