@@ -17,6 +17,8 @@ public:
 
     void update(sf::RenderWindow& window, float frameDelta);
 
+    void addShot(const sf::Vector2f& position, const sf::Vector2f& direction);
+
 
 private:
     Engine() = default;

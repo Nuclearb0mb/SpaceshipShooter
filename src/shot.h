@@ -1,10 +1,11 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
+
 class Shot
 {
 public:
-    explicit Shot(const sf::Vector2f& direction);
+    explicit Shot(const sf::Vector2f& position, const sf::Vector2f& direction);
     virtual ~Shot() = default;
 
     Shot(const Shot&) = delete;
@@ -19,5 +20,5 @@ private:
     sf::CircleShape _shape {10.0f};
 
     sf::Vector2f _direction {0.0f,0.0f};
-    float _speed {150};
+    float _speed {300};
 };

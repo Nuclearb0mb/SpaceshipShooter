@@ -1,6 +1,8 @@
-#include "ship.h"
 #include <math.h>
 #include <glm/glm.hpp>
+
+#include "ship.h"
+#include "engine.h"
 
 
 Ship::Ship()
@@ -30,6 +32,7 @@ void Ship::handleInputs(float frameDelta)
 {
     handleRotationInput(frameDelta);
     handleMovementInput(frameDelta);
+    handleWeaponInput(frameDelta);
 }
 
 void Ship::handleRotationInput(float frameDelta)    //TODO timing independent from framerate
@@ -63,6 +66,21 @@ void Ship::handleMovementInput(float frameDelta)
     }
 }
 
+void Ship::handleWeaponInput(float frameDelta)
+{
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
+    {
+        if (_shotCooldown <= 0)
+        {
+            shoot();
+            _shotCooldown = 1/_rateOfFire;
+        }
+
+            
+        
+    }
+}
+
 sf::Vector2f Ship::getForwardVector() const
 {
     return sf::Vector2f(std::cos(glm::radians(_rotation)), std::sin(glm::radians(_rotation)));
@@ -73,9 +91,14 @@ void Ship::update(sf::RenderWindow &window, float frameDelta)
     _shape.setPosition(_position);
     _shape.setRotation(_rotation);
 
+    _shotCooldown -= frameDelta;
+
     handleInputs(frameDelta);
  
     window.draw(_shape);
 }
 
-
+void Ship::shoot()
+{
+    Engine::get().addShot( _position, getForwardVector());
+}
