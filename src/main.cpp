@@ -11,9 +11,6 @@ int main()
     // create the window
     sf::RenderWindow window(sf::VideoMode(800, 600), "My window");
 
-
-    Shot shot1(sf::Vector2f(1.0,0.0));
-
     Engine::get().init();
 
     auto lastFrameTimePoint = std::chrono::steady_clock::now();
@@ -48,7 +45,6 @@ int main()
         lastFrameTimePoint = now;
 
         Engine::get().update(window, frameDelta);
-        shot1.update(window, frameDelta);
 
         
         // end the current frame
