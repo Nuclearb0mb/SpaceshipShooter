@@ -1,5 +1,6 @@
 #include "ship.h"
 #include <math.h>
+#include <glm/glm.hpp>
 
 Ship::Ship()
 {
@@ -32,7 +33,7 @@ void Ship::handleInputs(float frameDelta)
 
 void Ship::handleRotationInput(float frameDelta)    //TODO timing independent from framerate
 {
-    static const float ROTATION_SPEED = 60;     // degrees/s
+    static const float ROTATION_SPEED = 120;     // degrees/s
     float rotateAngle = ROTATION_SPEED*frameDelta;
 
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
@@ -44,11 +45,26 @@ void Ship::handleRotationInput(float frameDelta)    //TODO timing independent fr
     {
         _rotation += rotateAngle;
     }
+
+    _rotation = fmod(_rotation, 360.0f);
 }
 
 void Ship::handleMovementInput(float frameDelta)
-{
+{    
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+    {
+        _position += getForwardVector() * frameDelta * _speed;
+    }
 
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+    {
+        _position -= getForwardVector() * frameDelta * _speed;
+    }
+}
+
+sf::Vector2f Ship::getForwardVector() const
+{
+    return sf::Vector2f(std::cos(glm::radians(_rotation)), std::sin(glm::radians(_rotation)));
 }
 
 void Ship::update(sf::RenderWindow &window, float frameDelta)
