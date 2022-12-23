@@ -1,7 +1,9 @@
 #include <SFML/Graphics.hpp>
-#include "ship.h"
 #include <chrono>
 #include <thread>
+
+#include "ship.h"
+#include "shot.h"
 
 int main()
 {
@@ -9,6 +11,8 @@ int main()
     sf::RenderWindow window(sf::VideoMode(800, 600), "My window");
 
     Ship player1;
+
+    Shot shot1(sf::Vector2f(1.0,0.0));
 
     auto lastFrameTimePoint = std::chrono::steady_clock::now();
     // run the program as long as the window is open
@@ -41,6 +45,7 @@ int main()
         const float frameDelta = std::chrono::duration<float>(now-lastFrameTimePoint).count();
         lastFrameTimePoint = now;
         player1.update(window, frameDelta);
+        shot1.update(window, frameDelta);
 
         
         // end the current frame

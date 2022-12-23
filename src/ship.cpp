@@ -2,6 +2,7 @@
 #include <math.h>
 #include <glm/glm.hpp>
 
+
 Ship::Ship()
 {
     createShipShape();
