@@ -15,6 +15,8 @@ void Engine::init()
 
 void Engine::update(sf::RenderWindow &window, float frameDelta)
 {
+    _map.update(window, frameDelta);
+    
     for (auto& ship : _ships)
     {
         ship->update(window, frameDelta);

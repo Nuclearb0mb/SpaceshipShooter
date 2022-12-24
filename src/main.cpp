@@ -38,22 +38,13 @@ int main()
         window.clear(sf::Color::Black);
         window.setFramerateLimit(60);
 
-        // draw everything here...
-        // window.draw(...);
-
-        sf::CircleShape shape(50.f);
-
-        // set the shape color to green
-        shape.setFillColor(sf::Color(100, 250, 50));
-
-        window.draw(shape);
 
         // entity updates
         const auto now = std::chrono::steady_clock::now();
         const float frameDelta = std::chrono::duration<float>(now-lastFrameTimePoint).count();
         lastFrameTimePoint = now;
 
-        Engine::get().update(window, frameDelta);
+        Engine::get().update(window, frameDelta);       // window drawing is in update
 
         
         // end the current frame

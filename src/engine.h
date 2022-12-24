@@ -6,6 +6,7 @@
 
 #include "ship.h"
 #include "shot.h"
+#include "map.h"
 
 
 class Engine
@@ -27,6 +28,7 @@ private:
     Engine(const Engine&) = delete;
     Engine& operator= (const Engine&) = delete;
 
+    Map _map;
     std::vector<std::unique_ptr<Ship>> _ships;
     std::vector<std::unique_ptr<Shot>> _shots;
 
