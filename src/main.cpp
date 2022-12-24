@@ -24,11 +24,20 @@ int main()
             // "close requested" event: we close the window
             if (event.type == sf::Event::Closed)
                 window.close();
+
+            // catch the resize events
+            if (event.type == sf::Event::Resized)
+            {
+                // update the view to the new size of the window
+                sf::FloatRect visibleArea(0, 0, event.size.width, event.size.height);
+                window.setView(sf::View(visibleArea));
+            }
         }
 
         // clear the window with black color
         window.clear(sf::Color::Black);
         window.setFramerateLimit(60);
+
         // draw everything here...
         // window.draw(...);
 
