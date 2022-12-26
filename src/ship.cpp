@@ -95,6 +95,8 @@ void Ship::update(sf::RenderWindow &window, float frameDelta)
 
     handleInputs(frameDelta);    
     
+    // Make camera follow ship
+    // aplicable when only one ship exists
     sf::View camera;
     sf::Vector2f viewCenterOffset(sf::Vector2f(window.getSize().x * 0.5, window.getSize().y * 0.5));    // window size * 0.5 to get window center
     camera.reset(sf::FloatRect(_position - viewCenterOffset, sf::Vector2f(window.getSize().x, window.getSize().y)));
