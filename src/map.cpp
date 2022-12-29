@@ -9,7 +9,7 @@ Map::Map()
     
     _drawableRectangle.setTexture(&_texture, true);
 
-    _drawableRectangle.setSize(sf::Vector2f(_defaultTextureSize,_defaultTextureSize));
+    _drawableRectangle.setSize(sf::Vector2f(static_cast<float>(_defaultTextureSize), static_cast<float>(_defaultTextureSize)));
     _drawableRectangle.setPosition(sf::Vector2f(0.0f, 0.0f));
     
     generateDefaultTerrainMaterials();
@@ -63,10 +63,10 @@ void Map::generateTextureFromTerrain()      // Generates texture and updates dra
     // Generating image
     sf::Image textureImage;
 
-    textureImage.create(_terrainMaterials.size(), _terrainMaterials.size(), sf::Color::Black);
+    textureImage.create(static_cast<unsigned int>(_terrainMaterials.size()), static_cast<unsigned int>(_terrainMaterials.size()), sf::Color::Black);
 
-    int pixelIteratorX = 0;
-    int pixelIteratorY = 0;
+    unsigned int pixelIteratorX = 0;
+    unsigned int pixelIteratorY = 0;
 
     for (auto xLine : _terrainMaterials)
     {

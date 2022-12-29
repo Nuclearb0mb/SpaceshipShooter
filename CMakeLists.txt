@@ -11,6 +11,10 @@ file(GLOB_RECURSE SOURCES RELATIVE ${CMAKE_SOURCE_DIR} "src/*.cpp")
 
 add_executable(SpaceshipShooter ${SOURCES})
 
+find_package(glm CONFIG REQUIRED)
+    target_link_libraries(SpaceshipShooter PRIVATE glm::glm)
+
+
 target_link_libraries(SpaceshipShooter PRIVATE sfml-graphics)
 target_compile_features(SpaceshipShooter PRIVATE cxx_std_17)
 if (WIN32 AND BUILD_SHARED_LIBS)
